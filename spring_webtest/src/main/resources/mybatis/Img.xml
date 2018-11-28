@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="img">
+	<update id="update" parameterType="ImgDTO">
+		update img
+		set name =#{name},
+		title=#{title},
+		fname=#{fname}
+		where no=#{no}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from img
+		where no = #{no}
+
+	</delete>
+
+	<select id="passCheck" parameterType="Map" resultType="int">
+		SELECT COUNT(no) 
+		FROM img  
+		WHERE no=#{no} AND passwd=#{passwd}
+	</select>
+	<select id="Imgread" parameterType="int"></select>
+	<select id="read" parameterType="int" resultType="ImgDTO">
+		select no,
+		name, title, fname
+		from img
+		where no=#{no}
+	</select>
+
+	<insert id="create" parameterType="ImgDTO">
+		insert into img
+		(no, name,
+		title, passwd, mdate, fname, grpno)
+		values((select nvl(max(no),0)+1
+		from img),
+		#{name}, #{title},#{passwd}, sysdate, #{fname} , (select
+		nvl(max(grpno),0)+1
+		from img))
+
+	</insert>
+
+	<select id="list" parameterType="Map" resultType="ImgDTO">
+		select no, name, title, mdate, fname, indent, r
+		from(
+		select no, name,
+		title, mdate, fname,indent, rownum r
+		from(
+		select no, name, title,
+		mdate, fname, indent from img
+
+		<where>
+			<if test="col=='name'">
+				name like '%'||#{word}||'%'
+			</if>
+			<if test="col=='title'">
+				title like '%'||#{word}||'%'
+			</if>
+
+		</where>
+
+		order by grpno desc, ansnum
+		) 
+		
+		
+		<![CDATA[
+		)where r>=#{sno} and r<=#{eno} 
+		]]>
+
+	</select>
+
+	<select id="total" parameterType="Map" resultType="int">
+		select count(*) from Img
+		<where>
+			<if test="col=='name'">
+				name like '%'||#{word}||'%'
+			</if>
+			<if test="col=='title'">
+				title like '%'||#{word}||'%'
+			</if>
+			<if test="col=='total'">
+				total like '%'||#{word}||'%'
+			</if>
+
+		</where>
+
+
+	</select>
+</mapper>  

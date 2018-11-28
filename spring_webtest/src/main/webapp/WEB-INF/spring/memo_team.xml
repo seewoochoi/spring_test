@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE  tiles-definitions PUBLIC 
+    "-//Aapche Software Foundation//DTD Tiles Configuration 2.0//EN" 
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd"> 
+ 
+ <tiles-definitions>
+    <definition name="/memo/create" extends="main"> 
+        <put-attribute name="title" value="board 생성" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/memo/createform.jsp" /> 
+    </definition>   
+    <definition name="/memo/update" extends="main"> 
+        <put-attribute name="title" value="board 수정" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/memo/updateform.jsp" /> 
+    </definition>
+    <definition name="/memo/delete" extends="main"> 
+        <put-attribute name="title" value="board 삭제" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/memo/deleteform.jsp" /> 
+    </definition>  
+    <definition name="/memo/reply" extends="main"> 
+        <put-attribute name="title" value="board 답변" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/memo/replyform.jsp" /> 
+    </definition>  
+    <definition name="/memo/read" extends="main"> 
+        <put-attribute name="title" value="board 조회" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/memo/read.jsp" /> 
+    </definition>  
+    <definition name="/memo/list" extends="main"> 
+        <put-attribute name="title" value="board 목록" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/memo/list.jsp" /> 
+    </definition>   
+    
+           
+   
+</tiles-definitions> 
+
